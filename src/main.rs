@@ -1,9 +1,7 @@
-mod day1;
-mod day2;
+mod year_2017;
 
 fn main() {
-    day1::main();
-    day2::main();
+    year_2017::main();
 }
 
 
