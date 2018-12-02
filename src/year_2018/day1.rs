@@ -39,14 +39,12 @@ fn find_doublette(sums: &Vec<i32>, cycle_iter: &mut Cycle<Iter<i32>>) -> i32 {
     let next_sums = [&[current_freq_sum], &sums[..]].concat();
     match sums.iter().find(|&&x| x == current_freq_sum) {
         Some(_) => current_freq_sum,
-        _ => find_doublette(&next_sums, cycle_iter)
+        None => find_doublette(&next_sums, cycle_iter)
     }
 }
 
 pub fn part2(s: &str) -> i32 {
-    stacker::maybe_grow(32 * 32, 2*1024 * 1024, || {
-        find_doublette(&vec![0;1], &mut nr_vec_from_example(s).iter().cycle())
-    })
+    find_doublette(&vec![0;1], &mut nr_vec_from_example(s).iter().cycle())
 }
 
 pub fn main() {
