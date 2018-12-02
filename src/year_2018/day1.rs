@@ -39,7 +39,7 @@ fn find_doublette(sums: &Vec<i32>, cycle_iter: &mut Cycle<Iter<i32>>) -> i32 {
     let next_sums = [&[current_freq_sum], &sums[..]].concat();
     match sums.iter().find(|&&x| x == current_freq_sum) {
         Some(_) => current_freq_sum,
-        _ => find_doublette(&next_sums,cycle_iter)//vec!(current_freq_sum).append(&mut sums), cycle_iter)
+        _ => find_doublette(&next_sums, cycle_iter)
     }
 }
 
