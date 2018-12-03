@@ -1,11 +1,8 @@
+use utils::*;
+
 fn str_to_int(x: &str) -> i32 {
     x.parse().unwrap()
 }
-
-fn split_by_newline(x: &str) -> Vec<&str> {
-    x.split('\n').collect()
-}
-
 
 fn int_matrix_from_str(x: &str) -> Vec<Vec<i32>> {
     let lines: Vec<&str> = split_by_newline(x);
