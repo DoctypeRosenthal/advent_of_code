@@ -34,17 +34,34 @@ fn unwrap_option_int_for_sum(opt: Option<&i32>) -> i32 {
     }
 }
 
-fn find_doublette(sums: &Vec<i32>, cycle_iter: &mut Cycle<Iter<i32>>) -> i32 {
-    let current_freq_sum = sums[0] + unwrap_option_int_for_sum(cycle_iter.next());
-    let next_sums = [&[current_freq_sum], &sums[..]].concat();
-    match sums.iter().find(|&&x| x == current_freq_sum) {
-        Some(_) => current_freq_sum,
-        None => find_doublette(&next_sums, cycle_iter)
+// NOTE: the following function is a correct recursive implementation. Leads to stack overflow with
+// a big input string as seen in main()!
+//fn find_doublette(sums: &Vec<i32>, cycle_iter: &mut Cycle<Iter<i32>>) -> i32 {
+//    let current_freq_sum = sums[0] + unwrap_option_int_for_sum(cycle_iter.next());
+//    let next_sums = [&[current_freq_sum], &sums[..]].concat();
+//    match sums.iter().find(|&&x| x == current_freq_sum) {
+//        Some(_) => current_freq_sum,
+//        None => find_doublette(&next_sums, cycle_iter)
+//    }
+//}
+
+// The stack-friendly version
+fn find_doublette(nrs: Vec<i32>) -> i32 {
+    let mut sums = vec![0];
+    let mut current_freq_sum: i32 = 0;
+    for nr in nrs.iter().cycle() {
+        current_freq_sum += *nr;
+        if sums.contains(&current_freq_sum) {
+            println!("{}", current_freq_sum);
+            return current_freq_sum;
+        }
+        sums.push(current_freq_sum);
     }
+    0
 }
 
 pub fn part2(s: &str) -> i32 {
-    find_doublette(&vec![0;1], &mut nr_vec_from_example(s).iter().cycle())
+    find_doublette(nr_vec_from_example(s))
 }
 
 pub fn main() {
