@@ -1,6 +1,6 @@
 # advent_of_code
-advent of code from year_2017
-https://adventofcode.com/year_2017
+advent of code from year 2017 and 2018.
+https://adventofcode.com/
 
 Improving my Rust.
 
